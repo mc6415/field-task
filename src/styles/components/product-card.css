@@ -1,0 +1,19 @@
+.product-card__badge {
+    background-color: rgb(var(--color-highlight));
+    color: rgb(var(--color-white));
+}
+
+.product-card__variant-selector {
+    background-color: rgb(var(--color-white));
+    width: calc(100% - 30px);
+}
+
+@media screen(desktop) {
+    .product-card__variant-selector[aria-hidden="true"] {
+        display: none;
+    }
+    
+    .product-card__variant-selector[aria-hidden="false"] {
+        display: block;
+    }
+}

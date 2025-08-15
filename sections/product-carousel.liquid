@@ -1,0 +1,107 @@
+{%- capture prefix -%}{%- render 'asset-prefix' -%}{%- endcapture -%}
+
+<script
+    src="{{ 'product-carousel.js' | prepend: prefix | asset_url }}"
+    type="module"
+    defer
+></script>
+
+<section class="product-carousel" style="--padding-top: {{ section.settings.padding-top }}px; --padding-bottom: {{ section.settings.padding-bottom }}px;">
+<product-carousel>
+    <div class="product-carousel__title mb-20 mx-5 justify-between hidden desktop:flex">
+        <h2 class="text-heading-md">{{ section.settings.title }}</h2>
+        <h2 class="text-heading-md">
+            {% if section.settings.link %}
+                <a href="{{ section.settings.link }}">{{ section.settings.link_text }}</a>
+            {% endif %}
+        </h2>
+    </div>
+    <div class="product-carousel__inner grid-cols-12 gap-[2.5px] desktop:grid flex flex-nowrap overflow-auto">
+        {% for product in section.settings.products %}
+            <div class="desktop:col-span-3 col-span-8 flex-shrink-0 flex-grow-0 w-[66%] desktop:w-auto">
+                {% render 'product-card', product: product, lazy-load: section.settings.lazy-load %}
+            </div>
+        {% endfor %}
+    </div>
+</product-carousel>
+</section>
+
+{% schema %}
+{
+  "name": "Product Carousel",
+  "presets": [
+    {
+      "name": "Product Carousel"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "info": "Title to be shown above the carousel on desktop"
+    },
+    {
+        "type": "url",
+        "id": "link",
+        "label": "Link",
+        "info": "Link to be shown above the carousel on desktop"
+    },
+    {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link Text",
+        "info": "Text to be shown above the carousel on desktop",
+        "default": "Shop now",
+    },
+    {
+      "type": "product_list",
+      "id": "products",
+      "label": "Products",
+      "limit": 4,
+      "info": "Select the products to display in the carousel"
+    },
+    {
+      "type": "header",
+      "content": "Position Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding-top",
+      "label": "Padding Top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "info": "Set the padding top for the carousel"
+    },
+    {
+      "type": "range",
+      "id": "padding-bottom",
+      "label": "Padding Bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "info": "Set the padding bottom for the carousel"
+    },
+    {
+      "type": "header",
+      "content": "Performance Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "lazy-load",
+      "label": "Lazy Load",
+      "default": true,
+      "info": "Enable lazy loading for the carousel, enable if this will load below the fold"
+    }
+  ]
+}
+{% endschema %}

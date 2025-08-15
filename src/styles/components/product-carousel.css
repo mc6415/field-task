@@ -1,0 +1,10 @@
+.product-carousel {
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-bottom);
+}
+
+@media screen(desktop) {
+    .product-carousel__inner {
+        display: grid;
+    }
+}

@@ -1,0 +1,80 @@
+{%- capture prefix -%}{%- render 'asset-prefix' -%}{%- endcapture -%}
+
+<script src="{{ 'product-card.js' | prepend: prefix | asset_url }}" type="module"></script>
+
+<product-card>
+    <div class="product-card relative" data-product-card="product-card">
+        <div class="product-card__image relative">
+            {%-liquid
+                assign loading = 'eager'
+                if lazy-load
+                    assign loading = 'lazy'
+                endif
+            -%}
+            {% render 'image', 
+                image: product.featured_image,
+                factor: 0.25,
+                mobile_factor: 0.66,
+                loading: loading
+            %}
+            <div 
+                class="product-card__variant-selector absolute bottom-[10px] mx-[15px] py-[15px] z-20 hidden desktop:block"
+                aria-hidden="true"
+                data-product-card="variant-selector"
+            >
+                <div class="product-card__variant-selector-options flex gap-[14px] justify-center text-sm">
+                    {% for variant in product.variants %}
+                        <div 
+                            class="product-card__variant-selector-option cursor-pointer text-sm hover:underline"
+                            data-product-card="variant-selector-option"
+                            data-variant-id="{{ variant.id }}"
+                        >
+                            {{ variant.title }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="product-card__content px-5 mt-3">
+            <div class="product-card__title flex justify-between">
+                <div class="product-card__product-title text-sm font-normal">
+                    {{ product.title }}
+                </div>
+                {% if product.title contains 'Linen Blazer' %}
+                    <div class="product-card__product-variants text-sm hidden desktop:block">
+                        {% comment %}
+                            Hardcoded for now but ideally would be dynamic
+                        {% endcomment %}
+                        + 6 Colours
+                    </div>
+                {% endif %}
+            </div>
+            {% if product.metafields.product.color %}
+                <div class="product-card__color text-sm flex justify-between">
+                    {{ product.metafields.product.color }}
+                    {% if product.title contains 'Linen Blazer' %}
+                        <div class="product-card__product-variants text-sm block desktop:hidden opacity-[54%]">
+                            {% comment %}
+                                Hardcoded for now but ideally would be dynamic
+                            {% endcomment %}
+                            + 6 Colours
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            <div class="product-card__price mt-[14px] text-sm">
+                {{ product.price | money }}
+            </div>
+        </div>
+        {% if product.metafields.product.badge %}
+            <div class="product-card__badge text-xs absolute top-3 left-3 desktop:top-[10px] desktop:left-[10px] py-[4px] px-[10px] bg-highlight">
+                {{ product.metafields.product.badge }}
+            </div>
+        {% endif %}
+        <div class="product-card__wishlist absolute top-[10px] right-[10px] hidden desktop:block">
+            {% render 'icons', icon: 'wishlist' %}
+        </div>
+        <a href="{{ product.url }}" class="absolute inset-0 w-full h-full z-10"></a>
+    </div>
+</product-card>
