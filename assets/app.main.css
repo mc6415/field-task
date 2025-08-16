@@ -181,7 +181,7 @@ body #shopify-privacy-banner-div button.accept,body #shopify-privacy-banner-div 
 }
 
 @media (width >= 1025px){
-  .product-carousel{
+  .product-carousel__inner{
     display:grid;
   }
 }
@@ -772,8 +772,8 @@ b,strong{
   bottom:10px;
 }
 
-.left-\[10px\]{
-  left:10px;
+.left-3{
+  left:.75rem;
 }
 
 .right-0{
@@ -786,6 +786,10 @@ b,strong{
 
 .top-0{
   top:0;
+}
+
+.top-3{
+  top:.75rem;
 }
 
 .top-\[10px\]{
@@ -914,6 +918,10 @@ b,strong{
 
 .w-6{
   width:1.5rem;
+}
+
+.w-\[66\%\]{
+  width:66%;
 }
 
 .w-full{
@@ -1080,6 +1088,11 @@ b,strong{
   line-height:1.5em;
 }
 
+.text-xs{
+  font-size:var(--text-xs);
+  line-height:1.3em;
+}
+
 .font-normal{
   font-weight:400;
 }
@@ -1098,6 +1111,10 @@ b,strong{
 
 .underline{
   text-decoration-line:underline;
+}
+
+.opacity-\[54\%\]{
+  opacity:.54;
 }
 
 .outline-none{
@@ -1159,6 +1176,14 @@ b,strong{
 }
 
 @media (width >= 1025px){
+  .desktop\:left-\[10px\]{
+    left:10px;
+  }
+
+  .desktop\:top-\[10px\]{
+    top:10px;
+  }
+
   .desktop\:col-span-3{
     grid-column:span 3 / span 3;
   }
@@ -1167,8 +1192,20 @@ b,strong{
     display:block;
   }
 
+  .desktop\:flex{
+    display:flex;
+  }
+
   .desktop\:grid{
     display:grid;
+  }
+
+  .desktop\:hidden{
+    display:none;
+  }
+
+  .desktop\:w-auto{
+    width:auto;
   }
 }
 

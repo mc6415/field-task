@@ -24,13 +24,16 @@
             >
                 <div class="product-card__variant-selector-options flex gap-[14px] justify-center text-sm">
                     {% for variant in product.variants %}
-                        <div 
-                            class="product-card__variant-selector-option cursor-pointer text-sm hover:underline"
+                        <button
+                            class="product-card__variant-selector-option cursor-pointer text-sm hover:enabled:underline disabled:cursor-default"
                             data-product-card="variant-selector-option"
                             data-variant-id="{{ variant.id }}"
+                            {% unless variant.available %}
+                                disabled
+                            {% endunless %}
                         >
                             {{ variant.title }}
-                        </div>
+                        </button>
                     {% endfor %}
                 </div>
             </div>

@@ -8,6 +8,10 @@
     width: calc(100% - 30px);
 }
 
+.product-card__variant-selector-option:disabled {
+    color: rgb(var(--color-pale-grey));
+}
+
 @media screen(desktop) {
     .product-card__variant-selector[aria-hidden="true"] {
         display: none;
